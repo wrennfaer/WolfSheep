@@ -500,8 +500,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef2ca147e7fc8fa48a83a64139f46f43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMove
-  moveSpeed: 5
-  distanceToTarget: 0.1
+  moveSpeed: 3
+  stopDistance: 0.1
+  detectionRange: 5
 --- !u!50 &700957658
 Rigidbody2D:
   serializedVersion: 5
