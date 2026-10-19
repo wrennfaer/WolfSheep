@@ -1,6 +1,7 @@
 
 using UnityEngine;
 
+public class sheepmovement : MonoBehaviour
 {
     // Sheep movement speed
     public float moveSpeed = 5f;
