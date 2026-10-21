@@ -31,6 +31,7 @@ public class SceneManagement : MonoBehaviour
             MainObject.SetActive(true);
         }
     }
+    
     public void MenuScene()
     {
         SceneManager.LoadScene("Menu");
