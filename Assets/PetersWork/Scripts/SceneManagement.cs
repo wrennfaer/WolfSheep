@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 
 public class SceneManagement : MonoBehaviour
@@ -17,13 +18,14 @@ public class SceneManagement : MonoBehaviour
         PauseObject.SetActive(false);
         HTPObject.SetActive(false);
         CreditsObject.SetActive(false);
-        MainObject.SetActive(false);
+        MainObject.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        //if(Input.GetKeyDown(KeyCode.Escape)) old
+        if(Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             PauseObject.SetActive(true);
             HTPObject.SetActive(false);
@@ -31,7 +33,7 @@ public class SceneManagement : MonoBehaviour
             MainObject.SetActive(true);
         }
     }
-    
+
     public void MenuScene()
     {
         SceneManager.LoadScene("Menu");
