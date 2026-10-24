@@ -2,14 +2,16 @@ using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
-    Vector3 targetPosition;
-    Rigidbody2D rb;
     public float moveSpeed = 3f;
     public float stopDistance = 0.3f;
     public float detectionRange = 5f;
+    public LayerMask wallMask;
+    Vector3 targetPosition;
+    Rigidbody2D rb;
     enum State {Idle, Chase, Attack}
     State state = State.Idle;
     GameObject player;
+    bool isTouchingPlayer = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,15 +23,18 @@ public class EnemyMove : MonoBehaviour
     {
         if (player != null)
             targetPosition = player.transform.position;
+        else return;
+        bool seePlayer = CanSeePlayer();
         // Make sure they arent right next to each other, if they are then dont move
-        if (Vector3.Distance(transform.position, targetPosition) < stopDistance)
+        if (isTouchingPlayer)
         {
             state = State.Attack;
         }
-        else if (Vector3.Distance(transform.position, targetPosition) < detectionRange)
+        else if(Vector3.Distance(transform.position, targetPosition) < detectionRange && seePlayer)
         {
             state = State.Chase;
-        } else
+        }
+        else
         {
             state = State.Idle;
         }
@@ -41,6 +46,8 @@ public class EnemyMove : MonoBehaviour
         switch (state)
         {
             case State.Attack:
+                Debug.Log("Player attacked");
+
                 break;
             case State.Chase:
                 MoveTowardsTarget();
@@ -48,6 +55,16 @@ public class EnemyMove : MonoBehaviour
             case State.Idle:
             default:
                 break;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            isTouchingPlayer = true;
+            Destroy(collision.gameObject);
+            isTouchingPlayer = false;
         }
     }
 
@@ -61,5 +78,14 @@ public class EnemyMove : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
+    }
+
+    bool CanSeePlayer()
+    {
+        RaycastHit2D hit = Physics2D.Linecast(transform.position, targetPosition, wallMask);
+        bool touchWall = hit.collider == null;
+        Color debugColor = touchWall ? Color.green : Color.red;
+        Debug.DrawLine(transform.position, targetPosition, debugColor);
+        return touchWall;
     }
 }
