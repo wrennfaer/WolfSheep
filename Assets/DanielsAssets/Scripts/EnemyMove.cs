@@ -2,20 +2,26 @@ using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
+    public LayerMask wallMask;
     public float moveSpeed = 3f;
     public float stopDistance = 0.3f;
     public float detectionRange = 5f;
-    public LayerMask wallMask;
     public float searchDuration = 3f;
+    public float lookAhead = 0.5f;
+    public float baddieThiccness = 0.4f;
+    public float maxAngle = 90f;
+    public float angleStep = 15f;
     Vector3 targetPosition;
     Rigidbody2D rb;
     enum State {Idle, Chase, Search, Attack}
     State state = State.Idle;
     GameObject player;
     Vector3 lastKnownPos;
+    Vector3 lastChosenDirection;
     bool hasLastKnown = false;
     bool isTouchingPlayer = false;
     bool hasArrived = false;
+    int prefSide = 1;
     float searchTimer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,7 +40,7 @@ public class EnemyMove : MonoBehaviour
             return;
         }
         bool seePlayer = CanSeePlayer();
-        // Make sure they arent right next to each other, if they are then dont move
+        // What state we in
         if (isTouchingPlayer)
         {
             state = State.Attack;
@@ -87,6 +93,7 @@ public class EnemyMove : MonoBehaviour
                 break;
             case State.Idle:
             default:
+                prefSide = 1;
                 break;
         }
     }
@@ -101,14 +108,18 @@ public class EnemyMove : MonoBehaviour
 
     void MoveTowardsTarget(Vector3 targetPos)
     {
-        Vector3 direction = (targetPos - transform.position).normalized;
-        rb.MovePosition(transform.position + direction * moveSpeed * Time.fixedDeltaTime);
+        lastChosenDirection = (targetPos - transform.position).normalized;
+        lastChosenDirection = PickDirection(lastChosenDirection);
+        Debug.DrawLine(transform.position, lastKnownPos, Color.blue);
+
+        rb.MovePosition(transform.position + lastChosenDirection * moveSpeed * Time.fixedDeltaTime);
     }
 
-    void OnDrawGizmosSelected()
+    void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
+        Gizmos.DrawWireSphere(transform.position + lastChosenDirection * lookAhead, baddieThiccness);
     }
 
     bool CanSeePlayer()
@@ -118,5 +129,31 @@ public class EnemyMove : MonoBehaviour
         Color debugColor = clearPath ? Color.green : Color.red;
         Debug.DrawLine(transform.position, targetPosition, debugColor);
         return clearPath;
+    }
+
+    Vector3 PickDirection(Vector3 desiredDir)
+    {
+        Debug.DrawRay(transform.position, desiredDir * lookAhead, Color.hotPink);
+        if(IsClear(desiredDir))
+            return desiredDir;
+        float angle = angleStep;
+        for (; angle <= maxAngle; angle+=angleStep)
+        {
+            Vector3 testAng;
+            if (IsClear(testAng = Quaternion.Euler(0,0, angle*prefSide) * desiredDir))
+                return testAng;
+            if (IsClear(testAng = Quaternion.Euler(0,0, -angle*prefSide) * desiredDir))
+            {
+                prefSide = -prefSide;
+                return testAng;
+            }
+        }
+        return Vector3.zero;
+    }
+
+    bool IsClear(Vector3 dir)
+    {
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, baddieThiccness, dir, lookAhead, wallMask);
+        return hit.collider == null;
     }
 }
