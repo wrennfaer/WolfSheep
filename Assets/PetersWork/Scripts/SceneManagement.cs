@@ -38,16 +38,16 @@ public class SceneManagement : MonoBehaviour
     {
         SceneManager.LoadScene("Menu");
     }
-    // public void GameScene()
-    // {
-    //     // main game scene. replace with real name of the game scene
-    //     SceneManager.LoadScene("GameScene");
-    // }
-    // public void ReturnToGame() 
-    // {
-    //     //Pause Screen
-    //     SceneManager.LoadScene("GameScene");
-    // }
+    public void PlayGame()
+    {
+        // main game scene. replace with real name of the game scene
+        SceneManager.LoadScene("Game");
+    }
+    public void ReturnToGame() 
+    {
+        //Pause Screen
+        SceneManager.LoadScene("Game");
+    }
     public void CreditsScene()
     {
         CreditsObject.SetActive(true);
