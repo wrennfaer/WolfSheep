@@ -43,6 +43,10 @@ public class SceneManagement : MonoBehaviour
         // main game scene. replace with real name of the game scene
         SceneManager.LoadScene("Game");
     }
+    public void Pause()
+    {
+        PauseObject.SetActive(true);
+    }
     public void ReturnToGame() 
     {
         //Pause Screen
