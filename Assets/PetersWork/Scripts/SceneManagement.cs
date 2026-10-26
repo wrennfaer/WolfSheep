@@ -30,7 +30,7 @@ public class SceneManagement : MonoBehaviour
             PauseObject.SetActive(true);
             HTPObject.SetActive(false);
             CreditsObject.SetActive(false);
-            MainObject.SetActive(true);
+            MainObject.SetActive(false);
         }
     }
 
@@ -47,6 +47,7 @@ public class SceneManagement : MonoBehaviour
     {
         //Pause Screen
         PauseObject.SetActive(false);
+        
     }
     public void CreditsScene()
     {
