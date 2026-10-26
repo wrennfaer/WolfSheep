@@ -46,7 +46,7 @@ public class SceneManagement : MonoBehaviour
     public void ReturnToGame() 
     {
         //Pause Screen
-        SceneManager.LoadScene("Game");
+        PauseObject.SetActive(false);
     }
     public void CreditsScene()
     {
