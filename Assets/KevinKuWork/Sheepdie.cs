@@ -24,8 +24,5 @@ public class SheepDie : MonoBehaviour
         );
     }
 
-    public void ReturnToMenu()
-    {
-        SceneManager.LoadScene("MainMenu");
-    }
+    
 }
