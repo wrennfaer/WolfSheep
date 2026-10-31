@@ -12,6 +12,7 @@ public class SceneManagement : MonoBehaviour
     public GameObject HTPObject;
     public GameObject CreditsObject;
     public GameObject MainObject;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,6 +32,7 @@ public class SceneManagement : MonoBehaviour
             HTPObject.SetActive(false);
             CreditsObject.SetActive(false);
             MainObject.SetActive(false);
+            Time.timeScale = 0;
         }
     }
 
@@ -46,11 +48,13 @@ public class SceneManagement : MonoBehaviour
     public void Pause()
     {
         PauseObject.SetActive(true);
+        Time.timeScale = 0;
     }
     public void ReturnToGame() 
     {
         //Pause Screen
         PauseObject.SetActive(false);
+        Time.timeScale = 1;
         
     }
     public void CreditsScene()
