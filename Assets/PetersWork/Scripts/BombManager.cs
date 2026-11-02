@@ -13,9 +13,10 @@ public class BombManager : MonoBehaviour
     }
 
     // Update is called once per frame
+    //"Bombs: "
     void Update()
     {
-        bombText.text = "Bombs: " + bombCount.ToString();
-    }
+        bombText.text = ": "+ bombCount.ToString();
+    } 
 
 }
