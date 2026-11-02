@@ -12,6 +12,7 @@ public class SceneManagement : MonoBehaviour
     public GameObject HTPObject;
     public GameObject CreditsObject;
     public GameObject MainObject;
+    public static bool GameIsPaused = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,11 +29,19 @@ public class SceneManagement : MonoBehaviour
         //if(Input.GetKeyDown(KeyCode.Escape)) old
         if(Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            PauseObject.SetActive(true);
-            HTPObject.SetActive(false);
-            CreditsObject.SetActive(false);
-            MainObject.SetActive(false);
-            Time.timeScale = 0;
+            if(GameIsPaused)
+            {
+                ReturnToGame();
+            }
+            else
+            {
+                Pause();
+            }
+            // PauseObject.SetActive(true);
+            // HTPObject.SetActive(false);
+            // CreditsObject.SetActive(false);
+            // MainObject.SetActive(false);
+            // Time.timeScale = 0;
         }
     }
 
@@ -48,13 +57,15 @@ public class SceneManagement : MonoBehaviour
     public void Pause()
     {
         PauseObject.SetActive(true);
-        Time.timeScale = 0;
+        Time.timeScale = 0f;
+        GameIsPaused = true;
     }
     public void ReturnToGame() 
     {
-        //Pause Screen
+        // Resume
         PauseObject.SetActive(false);
-        Time.timeScale = 1;
+        Time.timeScale = 1f;
+        GameIsPaused = false;
         
     }
     public void CreditsScene()
