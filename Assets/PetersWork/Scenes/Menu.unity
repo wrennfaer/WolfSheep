@@ -1271,7 +1271,7 @@ GameObject:
   - component: {fileID: 595600108}
   - component: {fileID: 595600107}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: SceneManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1289,12 +1289,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e04cb810f3eb2f44d8557d49d58899c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneManagement
-  PauseObject: {fileID: 0}
+  MainObject: {fileID: 2055267641}
   HTPObject: {fileID: 1605173745}
   CreditsObject: {fileID: 452537919}
-  MainObject: {fileID: 2055267641}
-  WinObject: {fileID: 0}
-  LoseObject: {fileID: 0}
 --- !u!4 &595600108
 Transform:
   m_ObjectHideFlags: 0
