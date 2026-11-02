@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
         WinObject.SetActive(true);
         GameIsPaused = true;
     }
-    public void LoseScene()
+    public void LoseScene() //gameOver
     {
         LoseObject.SetActive(true);
         GameIsPaused = true;
