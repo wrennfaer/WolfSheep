@@ -12,6 +12,10 @@ public class SceneManagement : MonoBehaviour
     public GameObject HTPObject;
     public GameObject CreditsObject;
     public GameObject MainObject;
+    public GameObject WinObject;
+    public GameObject LoseObject;
+    public static bool GameIsPaused = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,6 +23,8 @@ public class SceneManagement : MonoBehaviour
         HTPObject.SetActive(false);
         CreditsObject.SetActive(false);
         MainObject.SetActive(true);
+        WinObject.SetActive(false);
+        LoseObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -27,10 +33,19 @@ public class SceneManagement : MonoBehaviour
         //if(Input.GetKeyDown(KeyCode.Escape)) old
         if(Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            PauseObject.SetActive(true);
-            HTPObject.SetActive(false);
-            CreditsObject.SetActive(false);
-            MainObject.SetActive(true);
+            if(GameIsPaused)
+            {
+                ReturnToGame();
+            }
+            else
+            {
+                Pause();
+            }
+            // PauseObject.SetActive(true);
+            // HTPObject.SetActive(false);
+            // CreditsObject.SetActive(false);
+            // MainObject.SetActive(false);
+            // Time.timeScale = 0;
         }
     }
 
@@ -43,10 +58,19 @@ public class SceneManagement : MonoBehaviour
         // main game scene. replace with real name of the game scene
         SceneManager.LoadScene("Game");
     }
+    public void Pause()
+    {
+        PauseObject.SetActive(true);
+        Time.timeScale = 0f;
+        GameIsPaused = true;
+    }
     public void ReturnToGame() 
     {
-        //Pause Screen
-        SceneManager.LoadScene("Game");
+        // Resume
+        PauseObject.SetActive(false);
+        Time.timeScale = 1f;
+        GameIsPaused = false;
+        
     }
     public void CreditsScene()
     {
@@ -63,6 +87,16 @@ public class SceneManagement : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+    public void WinScene()
+    {
+        WinObject.SetActive(true);
+        GameIsPaused = true;
+    }
+    public void LoseScene()
+    {
+        LoseObject.SetActive(true);
+        GameIsPaused = true;
     }
 
 }
