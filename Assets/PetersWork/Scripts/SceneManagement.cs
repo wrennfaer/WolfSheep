@@ -12,6 +12,8 @@ public class SceneManagement : MonoBehaviour
     public GameObject HTPObject;
     public GameObject CreditsObject;
     public GameObject MainObject;
+    public GameObject WinObject;
+    public GameObject LoseObject;
     public static bool GameIsPaused = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -21,6 +23,8 @@ public class SceneManagement : MonoBehaviour
         HTPObject.SetActive(false);
         CreditsObject.SetActive(false);
         MainObject.SetActive(true);
+        WinObject.SetActive(false);
+        LoseObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -83,6 +87,16 @@ public class SceneManagement : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+    public void WinScene()
+    {
+        WinObject.SetActive(true);
+        GameIsPaused = true;
+    }
+    public void LoseScene()
+    {
+        LoseObject.SetActive(true);
+        GameIsPaused = true;
     }
 
 }
