@@ -1,29 +1,59 @@
+
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class sheepmovement : MonoBehaviour
 {
-    // Sheep movement speed
+    [Header("Sheep Movement")]
     public float moveSpeed = 5f;
-    Vector2 movement;
 
-    Rigidbody2D RB;
+    private Vector2 movement;
+    private Rigidbody2D RB;
+
+    [Header("Sheep Death")]
+    private bool isDead = false;
+
     void Start()
     {
-        
-        RB=GetComponent<Rigidbody2D>();
-
+        RB = GetComponent<Rigidbody2D>();
     }
+
     void Update()
     {
-        
-        movement= InputSystem.actions["Move"].ReadValue<Vector2>();
-       
+        if (isDead) return;
+
+        movement = InputSystem.actions["Move"]
+            .ReadValue<Vector2>();
     }
 
     void FixedUpdate()
     {
-        
-        RB.linearVelocity=movement*moveSpeed;
+        if (isDead) return;
+
+        RB.linearVelocity = movement * moveSpeed;
+    }
+
+    // Sheep dies
+    public void Die()
+    {
+        if (isDead) return;
+
+        isDead = true;
+
+        movement = Vector2.zero;
+        RB.linearVelocity = Vector2.zero;
+
+        Debug.Log("Sheep died!");
+
+        Destroy(gameObject);
+    }
+
+    // Restart the game
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(
+            SceneManager.GetActiveScene().buildIndex
+        );
     }
 }
