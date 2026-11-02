@@ -1289,7 +1289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e04cb810f3eb2f44d8557d49d58899c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneManagement
-  PauseObject: {fileID: 0}
+  PauseObject: {fileID: 2055267641}
   HTPObject: {fileID: 1605173745}
   CreditsObject: {fileID: 452537919}
   MainObject: {fileID: 2055267641}
