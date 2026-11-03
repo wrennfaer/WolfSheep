@@ -21,16 +21,18 @@ public class BombManager : MonoBehaviour
     } 
     public void CollectBomb()
     {
+        //Debug.Log("CollectBomb called!");
         if(GameManager.GameIsPaused)
         {
             return;
         }
         bombCount++;
+        //Debug.Log("Bombs collected: " + bombCount);
         UpdateBombText();
-        if(bombCount >= bombNeeded)
+        if(bombCount >= bombsNeeded)
         {
-
-            FindObjectOfType<GameManager>().WinScene();
+            //Debug.Log("WIN CONDITION REACHED!");
+            FindAnyObjectByType<GameManager>().WinScene();
         }
     }
 
