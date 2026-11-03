@@ -2984,8 +2984,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: 76}
-  m_SizeDelta: {x: 278.165, y: 58.7234}
+  m_AnchoredPosition: {x: 6.0009, y: -22.3962}
+  m_SizeDelta: {x: 899, y: 255.5158}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1440627381
 MonoBehaviour:
@@ -3007,7 +3007,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Add Credits here
+  m_text: 'Thank you
+
+    Kenney.nl for tilemaps
+
+    Wrenn for Player and enemy
+    assets
 
 '
   m_isRightToLeft: 0
@@ -3043,7 +3048,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -3075,7 +3080,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 0, w: 0.00002283565}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3107,7 +3112,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1605173746
 MonoBehaviour:
   m_ObjectHideFlags: 0
